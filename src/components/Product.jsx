@@ -10,6 +10,9 @@ const Product = ({ product }) => {
       />
       <p>{product.price}</p>
       <p>{product.store}</p>
+      <a href={product.link} target="_blank" rel="noreferrer">
+        See product in store
+      </a>
     </div>
   );
 };

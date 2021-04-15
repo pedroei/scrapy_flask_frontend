@@ -4,6 +4,18 @@ import Loading from './components/layout/Loading';
 
 import axios from 'axios';
 
+const randomTerms = [
+  'pc',
+  'smartwatch',
+  'phone',
+  'apple',
+  'samsung',
+  'xiaomi',
+  'asus',
+  'windows',
+  'macbook',
+];
+
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStore, setFilterStore] = useState([]);
@@ -13,13 +25,19 @@ const App = () => {
   const [lastSearch, setLastSearch] = useState('');
 
   useEffect(() => {
-    setAllProducts([]);
-    setProducts([]);
+    setIsLoading(true);
+    const startingTerm =
+      randomTerms[Math.floor(Math.random() * randomTerms.length)];
+    axios.get(`/lowest/${startingTerm}`).then((response) => {
+      setIsLoading(false);
+      setAllProducts(response.data);
+      setProducts(response.data);
+    });
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (searchTerm === '') return;
+    if (searchTerm === '' || searchTerm.startsWith(' ')) return;
 
     setIsLoading(true);
 
@@ -66,7 +84,7 @@ const App = () => {
     }
   };
 
-  //TODO: Random ---------------
+  //TODO: Random
   return (
     <div>
       <h1>Products scraper</h1>
