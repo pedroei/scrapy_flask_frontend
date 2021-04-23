@@ -3,6 +3,27 @@ import ProductList from './components/ProductList';
 import Loading from './components/layout/Loading';
 
 import axios from 'axios';
+import Filter from './components/Filter';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import SearchIcon from '@material-ui/icons/Search';
+import Grid from '@material-ui/core/Grid';
+
+const useStyles = makeStyles({
+  marginTop: {
+    marginTop: 25,
+  },
+  marginBottom: {
+    marginBottom: 25,
+  },
+  marginBottomLow: {
+    marginBottom: 15,
+  },
+});
 
 const randomTerms = [
   'pc',
@@ -23,6 +44,8 @@ const App = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [lastSearch, setLastSearch] = useState('');
+
+  const classes = useStyles();
 
   useEffect(() => {
     setIsLoading(true);
@@ -84,41 +107,39 @@ const App = () => {
     }
   };
 
-  //TODO: Random
   return (
-    <div>
-      <h1>Products scraper</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <span>Only: </span>
-          <input
-            type="checkbox"
-            name="Amazon ES"
-            value="Amazon ES"
-            onChange={handleChangeFilter}
-          />
-          <label htmlFor="Amazon ES">Amazon ES</label>&nbsp;&nbsp;
-          <input
-            type="checkbox"
-            name="Ebay"
-            value="Ebay"
-            onChange={handleChangeFilter}
-          />
-          <label htmlFor="Ebay">Ebay</label>&nbsp;&nbsp;
-          <input
-            type="checkbox"
-            name="KuantoKusta"
-            value="KuantoKusta"
-            onChange={handleChangeFilter}
-          />
-          <label htmlFor="KuantoKusta">KuantoKusta</label>
-        </div>
-        <br />
-        <input type="text" onChange={(e) => setSearchTerm(e.target.value)} />
-        <button>Search</button>
-      </form>
+    <Container>
+      <Typography
+        className={classes.marginTop}
+        variant="h3"
+        gutterBottom
+        align="center"
+      >
+        Products Scraper
+      </Typography>
+      <Container align="center" className={classes.marginBottom}>
+        <form onSubmit={handleSubmit}>
+          <Filter handleChangeFilter={handleChangeFilter} />
+          <br />
+          <Grid item xs={2}>
+            <TextField
+              className={classes.marginBottomLow}
+              label="Term"
+              onBlur={(e) => setSearchTerm(e.target.value)} // using onBlur to be faster, onChange provokes slow writing
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              endIcon={<SearchIcon />}
+            >
+              Search
+            </Button>
+          </Grid>
+        </form>
+      </Container>
       {isLoading ? <Loading /> : <ProductList products={products} />}
-    </div>
+    </Container>
   );
 };
 

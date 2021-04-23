@@ -1,19 +1,24 @@
 import Product from './Product';
+import Grid from '@material-ui/core/Grid';
 
 const ProductList = ({ products }) => {
   return (
-    <div style={ProductListStyle}>
-      {products.length > 0 ? (
-        products.map((product) => (
-          <Product key={product.id} product={product} />
-        ))
-      ) : (
-        <h4>No products found</h4>
-      )}
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Grid container justify="center" spacing={3}>
+          {products.length > 0 ? (
+            products.map((product) => (
+              <Grid key={product.id} item>
+                <Product product={product} />
+              </Grid>
+            ))
+          ) : (
+            <h2>No products found</h2>
+          )}
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
-
-const ProductListStyle = { padding: '10px' };
 
 export default ProductList;
