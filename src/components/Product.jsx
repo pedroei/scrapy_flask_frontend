@@ -30,7 +30,13 @@ const Product = ({ product }) => {
           title="Scraped Product"
         />
         <CardContent>
-          <Typography gutterBottom variant="h6" component="h2">
+          <Typography
+            gutterBottom
+            variant="h6"
+            component="h2"
+            maxLength="1"
+            className="lengthTitle"
+          >
             {product.name}
           </Typography>
           <Typography color="textSecondary" component="p">

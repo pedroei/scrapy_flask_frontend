@@ -1,0 +1,7 @@
+.lengthTitle {
+  display: block;
+  width: 350px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
