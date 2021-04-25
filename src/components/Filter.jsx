@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Filter({ handleSubmit, handleChangeFilter, setSearchTerm }) {
+function Filter({ handleChangeFilter }) {
   const classes = useStyles();
 
   return (

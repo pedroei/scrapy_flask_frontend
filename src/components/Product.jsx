@@ -7,6 +7,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
+import { useHistory } from 'react-router-dom';
+
 const useStyles = makeStyles({
   card: {
     maxWidth: 400,
@@ -17,11 +19,16 @@ const useStyles = makeStyles({
 });
 
 const Product = ({ product }) => {
+  const history = useHistory();
   const classes = useStyles();
+
+  const handleClickCard = () => {
+    history.push('/' + product.name);
+  };
 
   return (
     <Card className={classes.card} variant="outlined">
-      <CardActionArea>
+      <CardActionArea onClick={handleClickCard}>
         <CardMedia
           className={classes.media}
           component="img"
