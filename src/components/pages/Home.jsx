@@ -4,6 +4,7 @@ import Loading from '../layout/Loading';
 
 import axios from 'axios';
 import Filter from '../Filter';
+import ModalComponent from '../Modal';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -26,15 +27,16 @@ const useStyles = makeStyles({
 });
 
 const randomTerms = [
-  'pc',
+  'laptop',
   'smartwatch',
-  'phone',
+  'iphone',
+  'smartphone',
   'apple',
   'samsung',
   'xiaomi',
   'asus',
-  'windows',
-  'macbook',
+  'pen drive',
+  'pen usb',
 ];
 
 function Home() {
@@ -126,6 +128,8 @@ function Home() {
       <Container align="center" className={classes.marginBottom}>
         <form onSubmit={handleSubmit}>
           <Filter handleChangeFilter={handleChangeFilter} />
+          <br />
+          <ModalComponent />
           <br />
           <Grid item xs={2}>
             <TextField
